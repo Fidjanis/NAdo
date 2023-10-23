@@ -1,7 +1,7 @@
-﻿#include <iostream>
+﻿﻿
+#include <iostream>
 #include <fstream>
 #include <string>
-#include <conio.h>
 #include <Windows.h>
 
 using namespace std;
@@ -70,22 +70,22 @@ void addAnswerToAnswers(string fileName, Request r) {
 int main()
 {
 	cout << "The server is working\n";
-	fstream f("Z:/Разумовский/сервер и клиен/Для теста/text.txt");
+	fstream f("../text.txt");
 	f.seekg(0, ios::end);
 	long previousSize = f.tellg();
 	f.close();
-	while (1)
+	while (true)
 	{
 		Sleep(100);
-		f.open("Z:/Разумовский/сервер и клиен/Для теста/text.txt");
+		f.open("../text.txt");
 		f.seekg(0, ios::end);
 		long currentSize = f.tellg();
 		f.close();
 		if (currentSize > previousSize) {
 			previousSize = currentSize;
-			string lastText = getLastTaskFromFile("Z:/Разумовский/сервер и клиен/Для теста/text.txt");
+			string lastText = getLastTaskFromFile("../text.txt");
 			Request r = getRequest(lastText);
-			addAnswerToAnswers("Z:/Разумовский/сервер и клиен/Для теста/answer.txt", r);
+			addAnswerToAnswers("../answer.txt", r);
 			cout << "The answer is sent to the client №" << r.client_id << endl;
 			lastText.clear();
 		}

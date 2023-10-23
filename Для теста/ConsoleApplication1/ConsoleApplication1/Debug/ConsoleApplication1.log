@@ -1,0 +1,5 @@
+﻿  ConsoleApplication1.cpp
+Z:\Хохлов 25.2\сервер и клиен\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(15,19): warning C4129: c: неизвестная escape-последовательность
+Z:\Хохлов 25.2\сервер и клиен\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(17,22): warning C4244: =: преобразование "std::streamoff" в "int", возможна потеря данных
+Z:\Хохлов 25.2\сервер и клиен\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(21,30): warning C4244: =: преобразование "std::streamoff" в "int", возможна потеря данных
+  ConsoleApplication1.vcxproj -> Z:\Хохлов 25.2\сервер и клиен\ConsoleApplication1\Debug\ConsoleApplication1.exe
