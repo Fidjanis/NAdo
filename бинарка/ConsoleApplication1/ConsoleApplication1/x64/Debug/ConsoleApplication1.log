@@ -1,0 +1,4 @@
+﻿  ConsoleApplication1.cpp
+Z:\бинарка\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(35,61): warning C4267: инициализация: преобразование из "size_t" в "long"; возможна потеря данных
+Z:\бинарка\ConsoleApplication1\ConsoleApplication1\ConsoleApplication1.cpp(55,23): warning C4244: инициализация: преобразование "std::streamoff" в "long", возможна потеря данных
+  ConsoleApplication1.vcxproj -> Z:\бинарка\ConsoleApplication1\x64\Debug\ConsoleApplication1.exe
