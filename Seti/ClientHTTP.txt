@@ -1,0 +1,79 @@
+#include <iostream> 
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#include <winsock2.h> 
+#include <string>
+#pragma comment(lib, "ws2_32.lib") // Подключение библиотеки ws2_32.lib
+#pragma warning(disable: 4996)
+using namespace std;
+
+#define request "GET/ HTTP/1.1\r\n Host: localhost \r\n\r\n"
+#define max_pocket_size 65535
+
+int main() {
+    setlocale(0, "");
+
+    HOSTENT* hn;
+    char buff[max_pocket_size];
+    // Инициализация библиотеки Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        cerr << "Failed to initialize winsock" << endl;
+        return -1;
+    }
+
+    // Создание сокета
+    SOCKET clientSocket = socket(AF_INET, SOCK_STREAM, 0);
+    if (clientSocket == INVALID_SOCKET) {
+        cerr << "Failed to create client socket" << endl;
+        WSACleanup();
+        return -1;
+    }
+
+    if (NULL == (hn = gethostbyname("localhost")))
+        return -1;
+
+
+    // Установка параметров сервера
+    sockaddr_in adr;
+    adr.sin_family = AF_INET; // Используется IPv4
+    adr.sin_port = htons(8000); // Порт сервера
+    ((unsigned long*)&adr.sin_addr)[0] = ((unsigned long**)hn->h_addr_list)[0][0]; // IP-адрес сервера
+
+    // Установка соединения с сервером
+    if (connect(clientSocket, (sockaddr*)&adr, sizeof(adr)) == SOCKET_ERROR) {
+        cerr << "Failed to connect to server" << endl;
+        closesocket(clientSocket);
+        WSACleanup();
+        return -1;
+    }
+
+    if (SOCKET_ERROR == send(clientSocket, (char*)&request, sizeof(request), 0))
+    {
+        cerr << "Failed to send to server" << endl;
+        closesocket(clientSocket);
+        WSACleanup();
+        return -1;
+    }
+    
+    int len = 0;
+
+    do{
+       
+        if (SOCKET_ERROR == (len = recv(clientSocket, (char*)&buff, max_pocket_size, 0)))
+        {
+            cerr << "Failed to get answer from server" << endl;
+            closesocket(clientSocket);
+            WSACleanup();
+            return -1;
+        }
+
+        for (int i = 0; i < len; i++)
+            cout << buff[i];
+
+    } while (len != 0);
+
+    closesocket(clientSocket);
+    WSACleanup();
+
+    return 0;
+}

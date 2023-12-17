@@ -1,0 +1,116 @@
+#include <iostream> 
+#define _WINSOCK_DEPRECATED_NO_WARNINGS
+#include <winsock2.h> 
+#include <string>
+#include <sstream>
+#include <WS2tcpip.h>
+#pragma comment(lib, "ws2_32.lib") // Подключение библиотеки ws2_32.lib
+
+using std::cerr;
+using namespace std;
+
+int main() {
+    setlocale(0, "");
+    // Инициализация библиотеки Winsock
+    WSADATA wsaData;
+    if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0) {
+        cerr << "Failed to initialize winsock" << endl;
+        return 1;
+    }
+
+    struct addrinfo* addr = NULL;
+    // Установка параметров сервера
+    struct addrinfo serverAddr;
+    ZeroMemory(&serverAddr, sizeof(serverAddr));
+    serverAddr.ai_family = AF_INET; // Используется IPv4
+    serverAddr.ai_socktype = SOCK_STREAM;
+    serverAddr.ai_protocol = IPPROTO_TCP; // Порт сервера
+    serverAddr.ai_flags = AI_PASSIVE;
+    getaddrinfo("127.0.0.1", "8000", &serverAddr, &addr);
+
+    // Создание сокета
+    SOCKET serverSocket = socket(addr->ai_family, addr->ai_socktype, addr->ai_protocol);
+    if (serverSocket == INVALID_SOCKET) {
+        cerr << "Failed to create server socket" << endl;
+        WSACleanup();
+        return -1;
+    }
+
+    int result = bind(serverSocket, addr->ai_addr, (int)addr->ai_addrlen);
+
+    // Привязка сокета к локальному адресу
+    if (result == SOCKET_ERROR) {
+        cerr << "Failed to bind server socket" << endl;
+        closesocket(serverSocket);
+        WSACleanup();
+        return -1;
+    }
+
+    if (listen(serverSocket, SOMAXCONN) == SOCKET_ERROR)
+    {
+        cerr << "Listen failed." << endl;
+        closesocket(serverSocket);
+        WSACleanup();
+        return -1;
+    }
+
+    cout << "Сервер запущен и ожидает подключения клиентов..." << endl;
+
+    const int max_client_buffer_size = 1024;
+    char buf[max_client_buffer_size];
+    int client_socket = INVALID_SOCKET;
+
+    while (true) {
+
+        client_socket = accept(serverSocket, NULL, NULL);
+        if (client_socket == INVALID_SOCKET)
+        {
+            cerr << "Accept failed." << endl;
+            closesocket(serverSocket);
+            WSACleanup();
+            return -1;
+        }
+
+        stringstream response;
+        stringstream response_body;
+
+        int result = recv(client_socket, buf, max_client_buffer_size, 0);
+        if (result == SOCKET_ERROR)
+        {
+            cerr << "RECV failed." << endl;
+            closesocket(client_socket);
+            WSACleanup();
+            return -1;
+        }
+        else if (result == 0)
+        {
+            cerr << "connection closed...";
+        }
+        else if(result > 0)
+        {
+            //buf[result] = '\0';
+            response_body << "<title>Test c++ HTTP Server</title>\n" <<
+                "<h1>Test page</h1>\n" <<
+                "<p>This is body of the test page...</p>\n" <<
+                "<h2>Request headers</h2>\n" <<
+                "<pre>" << buf << "</pre>\n" <<
+                "<em><small> Test c++ Http Server</small></em>\n";
+            response << "HTTP/1.1 200 OK\r\n" << "Version: HTTP/1.1\r\n" << "Content-Type: text/html; charset=utf-8\r\n" <<
+                "Content-Length: " << response_body.str().length() << "\r\n\r\n" << response_body.str();
+
+            int result = send(client_socket, response.str().c_str(), response.str().length(), 0);
+            if (result == SOCKET_ERROR)
+            {
+                cerr << "send failed: " << WSAGetLastError()<<"\n";
+                closesocket(client_socket);
+            }
+        }
+
+    }
+        
+    closesocket(serverSocket);
+    freeaddrinfo(addr);
+    WSACleanup();
+
+    return 0;
+}
