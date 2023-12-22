@@ -1,0 +1,3 @@
+﻿  indiv_2_Algo.cpp
+Z:\algo\indiv_2_Algo\indiv_2_Algo\indiv_2_Algo.cpp(16,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  indiv_2_Algo.vcxproj -> Z:\algo\indiv_2_Algo\x64\Debug\indiv_2_Algo.exe
