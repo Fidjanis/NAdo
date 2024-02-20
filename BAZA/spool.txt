@@ -1,0 +1,1073 @@
+SQL> show user
+USER is "C##HR"
+SQL> @?/demo/schema/human_resources/hr_cre
+SP2-0310: unable to open file "C:\app\Root\product\21c\dbhomeXE/demo/schema/human_resources/hr_cre.sql"
+SQL> K:\Занин\HR Oracle\hr_cre.sql
+SP2-0734: unknown command beginning "K:\Занин\H..." - rest of line ignored.
+SQL> @K:\Занин\HR Oracle\hr_cre.sql
+SP2-0310: unable to open file "K:\Занин\HR.sql"
+SQL> @K:/Занин/HR Oracle/hr_cre.sql
+SP2-0310: unable to open file "K:/Занин/HR.sql"
+SQL> @Z:\BD\hr_cre.sql
+SQL> Rem
+SQL> Rem $Header: hr_cre.sql 03-mar-2001.10:05:13 ahunold Exp $
+SQL> Rem
+SQL> Rem hr_cre.sql
+SQL> Rem
+SQL> Rem  Copyright (c) Oracle Corporation 2001. All Rights Reserved.
+SQL> Rem
+SQL> Rem    NAME
+SQL> Rem      hr_cre.sql - Create data objects for HR schema
+SQL> Rem
+SQL> Rem    DESCRIPTION
+SQL> Rem      This script creates six tables, associated constraints
+SQL> Rem      and indexes in the human resources (HR) schema.
+SQL> Rem
+SQL> Rem    NOTES
+SQL> Rem
+SQL> Rem    CREATED by Nancy Greenberg, Nagavalli Pataballa - 06/01/00
+SQL> Rem
+SQL> Rem    MODIFIED   (MM/DD/YY)
+SQL> Rem    ahunold	09/14/00 - Added emp_details_view
+SQL> Rem    ahunold	02/20/01 - New header
+SQL> Rem    vpatabal  03/02/01 - Added regions table, modified regions
+SQL> Rem				 column in countries table to NUMBER.
+SQL> Rem				 Added foreign key from countries table
+SQL> Rem				 to regions table on region_id.
+SQL> Rem				 Removed currency name, currency symbol
+SQL> Rem				 columns from the countries table.
+SQL> Rem				 Removed dn columns from employees and
+SQL> Rem				 departments tables.
+SQL> Rem				 Added sequences.
+SQL> Rem				 Removed not null constraint from
+SQL> Rem				 salary column of the employees table.
+SQL> 
+SQL> SET FEEDBACK 1
+SQL> SET NUMWIDTH 10
+SQL> SET LINESIZE 80
+SQL> SET TRIMSPOOL ON
+SQL> SET TAB OFF
+SQL> SET PAGESIZE 100
+SQL> SET ECHO OFF
+******  Creating REGIONS table ....
+
+Table created.
+
+
+Index created.
+
+
+Table altered.
+
+******  Creating COUNTRIES table ....
+
+Table created.
+
+
+Table altered.
+
+******  Creating LOCATIONS table ....
+
+Table created.
+
+
+Index created.
+
+
+Table altered.
+
+
+Sequence created.
+
+******  Creating DEPARTMENTS table ....
+
+Table created.
+
+
+Index created.
+
+
+Table altered.
+
+
+Sequence created.
+
+******  Creating JOBS table ....
+
+Table created.
+
+
+Index created.
+
+
+Table altered.
+
+******  Creating EMPLOYEES table ....
+
+Table created.
+
+
+Index created.
+
+
+Table altered.
+
+
+Table altered.
+
+
+Sequence created.
+
+******  Creating JOB_HISTORY table ....
+
+Table created.
+
+
+Index created.
+
+
+Table altered.
+
+******  Creating EMP_DETAILS_VIEW view ...
+
+View created.
+
+
+Commit complete.
+
+SQL> @Z:\BD\hr_popul.sql
+
+Session altered.
+
+******  Populating REGIONS table ....
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+******  Populating COUNTIRES table ....
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+******  Populating LOCATIONS table ....
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+******  Populating DEPARTMENTS table ....
+
+Table altered.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+******  Populating JOBS table ....
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+******  Populating EMPLOYEES table ....
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+******  Populating JOB_HISTORY table ....
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+1 row created.
+
+
+Table altered.
+
+
+Commit complete.
+
+SQL> @Z:\BD\hr_idx.sql
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Index created.
+
+
+Commit complete.
+
+SQL> @Z:\BD\hr_code.sql
+
+Procedure created.
+
+
+Trigger created.
+
+
+Trigger altered.
+
+
+Procedure created.
+
+
+Trigger created.
+
+
+Commit complete.
+
+SQL> @Z:\BD\hr_comnt.sql
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Comment created.
+
+
+Commit complete.
+
+SQL> @Z:\BD\hr_analz.sql
+BEGIN dbms_stats.gather_table_stats ('HR','COUNTRIES'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."COUNTRIES", insufficient privileges or
+does not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+BEGIN dbms_stats.gather_table_stats ('HR','DEPARTMENTS'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."DEPARTMENTS", insufficient privileges
+or does not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+BEGIN dbms_stats.gather_table_stats ('HR','EMPLOYEES'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."EMPLOYEES", insufficient privileges or
+does not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+BEGIN dbms_stats.gather_table_stats ('HR','JOBS'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."JOBS", insufficient privileges or does
+not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+BEGIN dbms_stats.gather_table_stats ('HR','JOB_HISTORY'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."JOB_HISTORY", insufficient privileges
+or does not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+BEGIN dbms_stats.gather_table_stats ('HR','LOCATIONS'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."LOCATIONS", insufficient privileges or
+does not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+BEGIN dbms_stats.gather_table_stats ('HR','REGIONS'); END;
+
+*
+ERROR at line 1:
+ORA-20000: Unable to analyze TABLE "HR"."REGIONS", insufficient privileges or
+does not exist
+ORA-06512: at "SYS.DBMS_STATS", line 40823
+ORA-06512: at "SYS.DBMS_STATS", line 40097
+ORA-06512: at "SYS.DBMS_STATS", line 40256
+ORA-06512: at "SYS.DBMS_STATS", line 40804
+ORA-06512: at line 1
+
+
+SQL> spool of
+
