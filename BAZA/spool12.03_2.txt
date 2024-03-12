@@ -1,0 +1,110 @@
+SQL> CREATE TABLE CUSTOMERS(
+  2     ID   INT              NOT NULL,
+  3     NAME VARCHAR (20)     NOT NULL,
+  4     AGE  INT              NOT NULL,
+  5     ADDRESS  CHAR (25) ,
+  6     SALARY   DECIMAL (18, 2),
+  7     PRIMARY KEY (ID)
+  8  );
+CREATE TABLE CUSTOMERS(
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> DROP TABLE CUSTOMERS;
+
+Table dropped.
+
+SQL> CREATE TABLE CUSTOMERS(
+  2     ID   INT              NOT NULL,
+  3     NAME VARCHAR (20)     NOT NULL,
+  4     AGE  INT              NOT NULL,
+  5     ADDRESS  CHAR (25) ,
+  6     SALARY   DECIMAL (18, 2),
+  7     PRIMARY KEY (ID)
+  8  );
+
+Table created.
+
+SQL> DESC CUSTOMERS;
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER(38)
+ NAME                                      NOT NULL VARCHAR2(20)
+ AGE                                       NOT NULL NUMBER(38)
+ ADDRESS                                            CHAR(25)
+ SALARY                                             NUMBER(18,2)
+
+SQL> 
+SQL> INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+  2  VALUES (1, 'Ramesh', 32, 'Ahmedabad', 2000.00 );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+  2  VALUES (2, 'Khilan', 25, 'Delhi', 1500.00 );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+  2  VALUES (3, 'kaushik', 23, 'Kota', 2000.00 );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+  2  VALUES (4, 'Chaitali', 25, 'Mumbai', 6500.00 );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+  2  VALUES (5, 'Hardik', 27, 'Bhopal', 8500.00 );
+
+1 row created.
+
+SQL> 
+SQL> INSERT INTO CUSTOMERS (ID,NAME,AGE,ADDRESS,SALARY)
+  2  VALUES (6, 'Komal', 22, 'MP', 4500.00 );
+
+1 row created.
+
+SQL> select * from CUSTOMERS;
+
+        ID NAME                        AGE ADDRESS                       SALARY 
+---------- -------------------- ---------- ------------------------- ---------- 
+         1 Ramesh                       32 Ahmedabad                       2000 
+         2 Khilan                       25 Delhi                           1500 
+         3 kaushik                      23 Kota                            2000 
+         4 Chaitali                     25 Mumbai                          6500 
+         5 Hardik                       27 Bhopal                          8500 
+         6 Komal                        22 MP                              4500 
+
+6 rows selected.
+
+SQL> SELECT ID, NAME, SALARY FROM CUSTOMERS;
+
+        ID NAME                     SALARY                                      
+---------- -------------------- ----------                                      
+         1 Ramesh                     2000                                      
+         2 Khilan                     1500                                      
+         3 kaushik                    2000                                      
+         4 Chaitali                   6500                                      
+         5 Hardik                     8500                                      
+         6 Komal                      4500                                      
+
+6 rows selected.
+
+SQL> DROP TABLE CUSTOMERS;
+
+Table dropped.
+
+SQL> DESC CUSTOMERS;
+ERROR:
+ORA-04043: object CUSTOMERS does not exist 
+
+
+SQL> spool off

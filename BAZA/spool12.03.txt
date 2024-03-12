@@ -1,0 +1,781 @@
+SQL> CREATE TABLE s_fiz_lic
+  2  (kod NUMBER(7,0) NOT NULL<
+  3  
+SQL> CREATE TABLE s_fiz_lic
+  2  (kod NUMBER(7,0) NOT NULL,
+  3  fam VARCHAR2(30),
+  4  im VARCHAR2(25),
+  5  otch VARCHAR2(25),
+  6  p_vidan VARCHAR2(80),
+  7  p_ser_nom VARCHAR2(20));
+
+Table created.
+
+SQL> CREATE TABLE doli
+  2  (kod NUMBER(10) NOT NULL PRIMARY KEY,
+  3  naimen VARCHAR2(50));
+
+Table created.
+
+SQL> CREATE TABLE s_fiz_lic2 as
+  2  (SELECT*FROM s_fiz_lic);
+
+Table created.
+
+SQL> CREATE TABLE s_fiz_lic3
+  2  (kod NUMBER(10) NOT NULL PRIMARY KEY,
+  3  fio VARCHAR2(250) NOT NULL CHECK(fio=UPPER(fio)),
+  4  pol NUMBER(1) DEFAULT 1,
+  5  kod_doli NUMBER(10) CONSTRAINT fk_doli REFERENCES doli(kod),
+  6  data_r DATE);
+
+Table created.
+
+SQL> DESC s_fiz_lic
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ KOD                                       NOT NULL NUMBER(7)
+ FAM                                                VARCHAR2(30)
+ IM                                                 VARCHAR2(25)
+ OTCH                                               VARCHAR2(25)
+ P_VIDAN                                            VARCHAR2(80)
+ P_SER_NOM                                          VARCHAR2(20)
+
+SQL> CREATE SEQUENCE my_seq
+  2  INCREMENT BY 1 START WITH 100
+  3  CYCLE MAXVALUE 1000 ORDER;
+
+Sequence created.
+
+SQL> SELECT my_seq.nextval FROM dual;
+
+   NEXTVAL                                                                      
+----------                                                                      
+       100                                                                      
+
+SQL> SELECT my_seq.currval FROM dual;
+
+   CURRVAL                                                                      
+----------                                                                      
+       100                                                                      
+
+SQL> SELECT my_seq.nextval FROM dual;
+
+   NEXTVAL                                                                      
+----------                                                                      
+       101                                                                      
+
+SQL> SELECT my_seq.nextval FROM dual;
+
+   NEXTVAL                                                                      
+----------                                                                      
+       102                                                                      
+
+SQL> SELECT my_seq.currval FROM dual;
+
+   CURRVAL                                                                      
+----------                                                                      
+       102                                                                      
+
+SQL> SELECT my_seq.currval FROM dual;
+
+   CURRVAL                                                                      
+----------                                                                      
+       102                                                                      
+
+SQL> SELECT my_seq.currval FROM dual;
+
+   CURRVAL                                                                      
+----------                                                                      
+       102                                                                      
+
+SQL> SELECT my_seq.currval FROM dual;
+
+   CURRVAL                                                                      
+----------                                                                      
+       102                                                                      
+
+SQL> CREATE VIEW V_FIZ_LIC AS
+  2  (SELECT*FROM S_FIZ_LIC);
+
+View created.
+
+SQL> CREATE VIEW V_FIZ_LIC2 (KOD, FIO, POL, DOLJ, DATA_R) AS
+  2  (SELECT d.KOD, d.FIO, d.POL, f.naimen, d.DATA_R
+  3  FROM S_FIZ_LIC3 d, doli f
+  4  
+SQL> CREATE VIEW V_FIZ_LIC2 (KOD, FIO, POL, DOLJ, DATA_R) AS
+  2  (SELECT d.KOD, d.FIO, d.POL, f.naimen, d.DATA_R
+  3  FROM S_FIZ_LIC3 d, dolj f
+  4  where d.kod_dolj=f.kod);
+FROM S_FIZ_LIC3 d, dolj f
+                   *
+ERROR at line 3:
+ORA-00942: table or view does not exist 
+
+
+SQL> CREATE VIEW V_FIZ_LIC2 (KOD, FIO, POL, DOLJ, DATA_R) AS
+  2  (SELECT d.KOD, d.FIO, d.POL, f.naimen, d.DATA_R
+  3  FROM S_FIZ_LIC3 d, doli f
+  4  where d.kod_doli=f.kod);
+
+View created.
+
+SQL> ALTER TABLE s_fiz_lic3 ADD sem_pol NUMBER(1);
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 RENAME COLUMN sem_pol TO sem_poloj;
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 MODIFY sem_poloj NUMBER(10);
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 DROP COLUMN sem_poloj;
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic ADD PRIMARY KEY (KOD) USING INDEX;
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 DROP CONSTRAINT fk_dolj;
+ALTER TABLE s_fiz_lic3 DROP CONSTRAINT fk_dolj
+                                       *
+ERROR at line 1:
+ORA-02443: Cannot drop constraint  - nonexistent constraint 
+
+
+SQL> ALTER TABLE s_fiz_lic3 DROP CONSTRAINT fk_doli;
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD);
+ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD)
+                                                           *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_doli FOREIGN KEY (kod_doli)  REFERENCES doli (KOD);
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 MODIFY CONSTRAINT fk_doli DISABLE;
+
+Table altered.
+
+SQL> ALTER TABLE s_fiz_lic3 MODIFY CONSTRAINT fk_doli ENABLE;
+
+Table altered.
+
+SQL> DROP TABLE s_fiz_lic2;
+
+Table dropped.
+
+SQL> DROP TABLE dolj CASCADE CONSTRAINTS PURGE;
+DROP TABLE dolj CASCADE CONSTRAINTS PURGE
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE doli CASCADE CONSTRAINTS PURGE;
+
+Table dropped.
+
+SQL> DROP VIEW  v_fiz_lic;
+
+View dropped.
+
+SQL> DROP SEQUENCE  my_seq;
+
+Sequence dropped.
+
+SQL> CREATE TABLE dolj
+  2  (kod NUMBER(10) NOT NULL PRIMARY KEY,
+  3   naimen VARCHAR2(50));
+
+Table created.
+
+SQL> ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD);
+ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD)
+                                                           *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> CREATE TABLE dolj
+  2  (kod NUMBER(10) NOT NULL PRIMARY KEY,
+  3   naimen VARCHAR2(50));
+CREATE TABLE dolj
+             *
+ERROR at line 1:
+ORA-00955: name is already used by an existing object 
+
+
+SQL> ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD);
+ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD)
+                                                           *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> ALTER TABLE s_fiz_lic3 ADD CONSTRACREATE TABLE doljINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD);
+ALTER TABLE s_fiz_lic3 ADD CONSTRACREATE TABLE doljINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD)
+                                               *
+ERROR at line 1:
+ORA-01735: invalid ALTER TABLE option 
+
+
+SQL> (kod NUMBER(10) NOT NULL PRIMARY KEY,
+  2   naimen VARCHAR2(50));
+(kod NUMBER(10) NOT NULL PRIMARY KEY,
+ *
+ERROR at line 1:
+ORA-00928: missing SELECT keyword 
+
+
+SQL> ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD);
+ALTER TABLE s_fiz_lic3 ADD CONSTRAINT fk_dolj FOREIGN KEY (kod_dolj)  REFERENCES dolj (KOD)
+                                                           *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> INSERT INTO s_fiz_lic VALUES (1,'Иванов','Иван','Иванович','ПВС Западного округа','3310 124568');
+
+1 row created.
+
+SQL> INSERT INTO s_fiz_lic VALUES (2,'Петров','Петр','Петрович', 'ПВС Центрального округа','3250 145868');
+
+1 row created.
+
+SQL> INSERT INTO s_fiz_lic VALUES (3,'Сидоров','Иван','Иванович', 'ПВС Западного округа','7810 124879');
+
+1 row created.
+
+SQL> INSERT INTO dolj VALUES (1, 'Слесарь');
+
+1 row created.
+
+SQL> INSERT INTO dolj VALUES (2, 'Программист');
+
+1 row created.
+
+SQL> INSERT INTO dolj VALUES (3, 'Бухгалтер');
+
+1 row created.
+
+SQL> INSERT INTO s_fiz_lic VALUES (4, 'Иванов', 'Иван','Иванович',NULL,NULL);
+
+1 row created.
+
+SQL> INSERT INTO s_fiz_lic (kod,im,otch,fam, p_vidan,p_ser_nom) VALUES (5, 'Иван', 'Иванович', 'Иванов', 'ПВС Западного округа', '3310 124568');
+
+1 row created.
+
+SQL> INSERT INTO s_fiz_lic (SELECT kod+5,im,otch,fam, p_vidan,p_ser_nom FROM s_fiz_lic);
+
+5 rows created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> INSERT INTO s_fiz_lic3 (kod, fio) (SELECT kod, UPPER(fam||' '||im||' '||otch) FROM s_fiz_lic);
+
+10 rows created.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> UPDATE  s_fiz_lic SET  Fam='Сидоров', im='Петр', otch='Иванович' WHERE kod=5;
+
+1 row updated.
+
+SQL> UPDATE s_fiz_lic3 SET fio=(SELECT UPPER(fam||' '||im||' '||otch) FROM s_fiz_lic WHERE kod=4) WHERE kod=5;
+
+1 row updated.
+
+SQL> UPDATE  s_fiz_lic3 SET kod_dolj=1 WHERE kod IN (1,2,5,6);
+UPDATE  s_fiz_lic3 SET kod_dolj=1 WHERE kod IN (1,2,5,6)
+                       *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> UPDATE  s_fiz_lic3 SET kod_dolj=2 WHERE kod IN (3,7);
+UPDATE  s_fiz_lic3 SET kod_dolj=2 WHERE kod IN (3,7)
+                       *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> UPDATE  s_fiz_lic3 SET kod_dolj=3 WHERE kod IN (8);
+UPDATE  s_fiz_lic3 SET kod_dolj=3 WHERE kod IN (8)
+                       *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DELETE FROM  s_fiz_lic WHERE kod=5;
+
+1 row deleted.
+
+SQL> DELETE FROM  s_fiz_lic;
+
+9 rows deleted.
+
+SQL> SELECT f.kod "Код", f.fio "Ф.И.О." FROM s_fiz_lic3 f;
+
+       Код                                                                      
+----------                                                                      
+Ф.И.О.                                                                          
+--------------------------------------------------------------------------------
+         1                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         2                                                                      
+Пе┬└ов Пе┬└ Пе┬└ови╟                                                            
+                                                                                
+         3                                                                      
+Сидо└ов Иван Иванови╟                                                           
+                                                                                
+
+       Код                                                                      
+----------                                                                      
+Ф.И.О.                                                                          
+--------------------------------------------------------------------------------
+         4                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         5                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         6                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       Код                                                                      
+----------                                                                      
+Ф.И.О.                                                                          
+--------------------------------------------------------------------------------
+         7                                                                      
+Пе┬└ Пе┬└ови╟ Пе┬└ов                                                            
+                                                                                
+         8                                                                      
+Иван Иванови╟ Сидо└ов                                                           
+                                                                                
+         9                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       Код                                                                      
+----------                                                                      
+Ф.И.О.                                                                          
+--------------------------------------------------------------------------------
+        10                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+10 rows selected.
+
+SQL> SELECT * FROM dolj WHERE kod=1;
+
+       KOD NAIMEN                                                               
+---------- --------------------------------------------------                   
+         1 Слесарь                                                              
+
+SQL> SELECT * FROM dolj WHERE kod>2 AND kod!=5;
+
+       KOD NAIMEN                                                               
+---------- --------------------------------------------------                   
+         3 Бухгалтер                                                            
+
+SQL> SELECT * FROM dolj WHERE kod between 2 AND 4;
+
+       KOD NAIMEN                                                               
+---------- --------------------------------------------------                   
+         2 Программист                                                          
+         3 Бухгалтер                                                            
+
+SQL> SELECT kod, fio, kod_dolj FROM s_fiz_lic3 WHERE kod_dolj IS NOT NULL;
+SELECT kod, fio, kod_dolj FROM s_fiz_lic3 WHERE kod_dolj IS NOT NULL
+                                                *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> SELECT naimen FROM dolj WHERE kod IN (1,2,3);
+
+NAIMEN                                                                          
+--------------------------------------------------                              
+Слесарь                                                                         
+Программист                                                                     
+Бухгалтер                                                                       
+
+SQL> SELECT kod_dolj, COUNT(*) kolvo FROM s_fiz_lic3 WHERE kod_dolj IS NOT NULL GROUP BY kod_dolj;
+SELECT kod_dolj, COUNT(*) kolvo FROM s_fiz_lic3 WHERE kod_dolj IS NOT NULL GROUP BY kod_dolj
+                                                                                    *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> SELECT kod_dolj, COUNT(*) kolvo FROM s_fiz_lic3 WHERE kod_dolj IS NOT NULL GROUP BY kod_dolj HAVING COUNT(*)>1;
+SELECT kod_dolj, COUNT(*) kolvo FROM s_fiz_lic3 WHERE kod_dolj IS NOT NULL GROUP BY kod_dolj HAVING COUNT(*)>1
+                                                                                    *
+ERROR at line 1:
+ORA-00904: "KOD_DOLJ": invalid identifier 
+
+
+SQL> SELECT kod, fio FROM s_fiz_lic3 ORDER BY fio DESC;
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         3                                                                      
+Сидо└ов Иван Иванови╟                                                           
+                                                                                
+         1                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         5                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         4                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         8                                                                      
+Иван Иванови╟ Сидо└ов                                                           
+                                                                                
+        10                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         6                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+         9                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+         2                                                                      
+Пе┬└ов Пе┬└ Пе┬└ови╟                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         7                                                                      
+Пе┬└ Пе┬└ови╟ Пе┬└ов                                                            
+                                                                                
+
+10 rows selected.
+
+SQL> SELECT kod, fio FROM s_fiz_lic3 ORDER BY 2,1 ASC;
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         7                                                                      
+Пе┬└ Пе┬└ови╟ Пе┬└ов                                                            
+                                                                                
+         2                                                                      
+Пе┬└ов Пе┬└ Пе┬└ови╟                                                            
+                                                                                
+         6                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         9                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+        10                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+         8                                                                      
+Иван Иванови╟ Сидо└ов                                                           
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         1                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         4                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         5                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         3                                                                      
+Сидо└ов Иван Иванови╟                                                           
+                                                                                
+
+10 rows selected.
+
+SQL> SELECT kod, fio FROM s_fiz_lic3
+  2  UNION ALL
+  3  SELECT kod, fio FROM s_fiz_lic3;
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         1                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         2                                                                      
+Пе┬└ов Пе┬└ Пе┬└ови╟                                                            
+                                                                                
+         3                                                                      
+Сидо└ов Иван Иванови╟                                                           
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         4                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         5                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         6                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         7                                                                      
+Пе┬└ Пе┬└ови╟ Пе┬└ов                                                            
+                                                                                
+         8                                                                      
+Иван Иванови╟ Сидо└ов                                                           
+                                                                                
+         9                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+        10                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+         1                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         2                                                                      
+Пе┬└ов Пе┬└ Пе┬└ови╟                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         3                                                                      
+Сидо└ов Иван Иванови╟                                                           
+                                                                                
+         4                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         5                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         6                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+         7                                                                      
+Пе┬└ Пе┬└ови╟ Пе┬└ов                                                            
+                                                                                
+         8                                                                      
+Иван Иванови╟ Сидо└ов                                                           
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         9                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+        10                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+20 rows selected.
+
+SQL> SELECT kod, fio FROM s_fiz_lic3
+  2  UNION
+  3  SELECT kod, fio FROM s_fiz_lic3;
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         1                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         2                                                                      
+Пе┬└ов Пе┬└ Пе┬└ови╟                                                            
+                                                                                
+         3                                                                      
+Сидо└ов Иван Иванови╟                                                           
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         4                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         5                                                                      
+Иванов Иван Иванови╟                                                            
+                                                                                
+         6                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+         7                                                                      
+Пе┬└ Пе┬└ови╟ Пе┬└ов                                                            
+                                                                                
+         8                                                                      
+Иван Иванови╟ Сидо└ов                                                           
+                                                                                
+         9                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+       KOD                                                                      
+----------                                                                      
+FIO                                                                             
+--------------------------------------------------------------------------------
+        10                                                                      
+Иван Иванови╟ Иванов                                                            
+                                                                                
+
+10 rows selected.
+
+SQL> DELETE FROM  s_fiz_lic3 WHERE kod=5;
+
+1 row deleted.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> DELETE FROM  s_fiz_lic3 WHERE kod=4;
+
+1 row deleted.
+
+SQL> ROLLBACK;
+
+Rollback complete.
+
+SQL> DELETE FROM  s_fiz_lic3 WHERE kod=1;
+
+1 row deleted.
+
+SQL> SAVEPOINT example;
+
+Savepoint created.
+
+SQL> DELETE FROM  s_fiz_lic3 WHERE kod=4;
+
+1 row deleted.
+
+SQL> ROLLBACK WORK TO example;
+
+Rollback complete.
+
+SQL> COMMIT;
+
+Commit complete.
+
+SQL> GRANT SELECT, ALTER, DELETE ON s_fiz_lic TO system;
+
+Grant succeeded.
+
+SQL> REVOKE DELETE ON s_fiz_lic FROM  system;
+REVOKE DELETE ON s_fiz_lic FROM  system
+                                 *
+ERROR at line 1:
+ORA-01749: you may not GRANT/REVOKE privileges to/from yourself 
+
+
+SQL> GRANT ALL ON s_fiz_lic TO system;
+
+Grant succeeded.
+
+SQL> DROP TABLE s_fiz_lic;
+
+Table dropped.
+
+SQL> DROP TABLE s_fiz_lic2;
+DROP TABLE s_fiz_lic2
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> DROP TABLE s_fiz_lic3;
+
+Table dropped.
+
+SQL> DROP TABLE dolj;
+
+Table dropped.
+
+SQL> DROP TABLE dolj CASCADE CONSTRAINTS PURGE;
+DROP TABLE dolj CASCADE CONSTRAINTS PURGE
+           *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> spool off
