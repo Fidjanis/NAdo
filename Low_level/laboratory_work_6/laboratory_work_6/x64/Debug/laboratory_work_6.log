@@ -1,0 +1,3 @@
+﻿  laboratory_work_6.cpp
+Z:\Low_level\laboratory_work_6\laboratory_work_6\laboratory_work_6.cpp(15,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  laboratory_work_6.vcxproj -> Z:\Low_level\laboratory_work_6\x64\Debug\laboratory_work_6.exe
