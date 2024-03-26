@@ -1,0 +1,578 @@
+SQL> select * FROM emp
+  2  
+SQL> select * FROM emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+
+7 rows selected.
+
+SQL> select distinct job, sal from emp
+  2  
+SQL> select distinct job, sal from emp;
+
+JOB              SAL                                                            
+--------- ----------                                                            
+CLERK            800                                                            
+SALESMAN        1600                                                            
+SALESMAN        1250                                                            
+MANAGER         2975                                                            
+MANAGER         2850                                                            
+
+SQL> select job, sal from emp;
+
+JOB              SAL                                                            
+--------- ----------                                                            
+CLERK            800                                                            
+CLERK            800                                                            
+SALESMAN        1600                                                            
+SALESMAN        1250                                                            
+MANAGER         2975                                                            
+SALESMAN        1250                                                            
+MANAGER         2850                                                            
+
+7 rows selected.
+
+SQL> select * FROM emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+
+7 rows selected.
+
+SQL> select ename, ' работает в ', deptno, ' отделе ' from emp;
+
+ENAME      '└або┬ае┬в'               DEPTNO 'о┬деле'                            
+---------- --------------------- ---------- --------------                      
+SMITH       работает в                   20  отделе                             
+SMITH       работает в                   20  отделе                             
+ALLEN       работает в                   30  отделе                             
+WARD        работает в                   30  отделе                             
+JONES       работает в                   20  отделе                             
+MARTIN      работает в                   30  отделе                             
+BLAKE       работает в                   30  отделе                             
+
+7 rows selected.
+
+SQL> select ename, ' work in  ', deptno, ' отделе ' from emp;
+
+ENAME      'WORKIN'       DEPTNO 'о┬деле'                                       
+---------- ---------- ---------- --------------                                 
+SMITH       work in           20  отделе                                        
+SMITH       work in           20  отделе                                        
+ALLEN       work in           30  отделе                                        
+WARD        work in           30  отделе                                        
+JONES       work in           20  отделе                                        
+MARTIN      work in           30  отделе                                        
+BLAKE       work in           30  отделе                                        
+
+7 rows selected.
+
+SQL> SELECT ename,sal*12,comm/3 FROM emp;
+
+ENAME          SAL*12     COMM/3                                                
+---------- ---------- ----------                                                
+SMITH            9600                                                           
+SMITH            9600                                                           
+ALLEN           19200        100                                                
+WARD            15000 166.666667                                                
+JONES           35700                                                           
+MARTIN          15000 466.666667                                                
+BLAKE           34200                                                           
+
+7 rows selected.
+
+SQL> SELECT ename||' работает на должности ' || job
+  2  FROM em
+  3  
+SQL> FROM em
+SP2-0042: unknown command "FROM em" - rest of line ignored.
+SQL> SELECT ename||' работает на должности ' || job from emp;
+
+ENAME||'└або┬ае┬надолжно┴┬и'||JOB                                               
+-------------------------------------------------------------                   
+SMITH работает на должности CLERK                                               
+SMITH работает на должности CLERK                                               
+ALLEN работает на должности SALESMAN                                            
+WARD работает на должности SALESMAN                                             
+JONES работает на должности MANAGER                                             
+MARTIN работает на должности SALESMAN                                           
+BLAKE работает на должности MANAGER                                             
+
+7 rows selected.
+
+SQL> SELECT ename, length(ename) FROM emp
+  2  ;
+
+ENAME      LENGTH(ENAME)                                                        
+---------- -------------                                                        
+SMITH                  5                                                        
+SMITH                  5                                                        
+ALLEN                  5                                                        
+WARD                   4                                                        
+JONES                  5                                                        
+MARTIN                 6                                                        
+BLAKE                  5                                                        
+
+7 rows selected.
+
+SQL> SELECT ename,sal*1.15,comm FROM emp;
+
+ENAME        SAL*1.15       COMM                                                
+---------- ---------- ----------                                                
+SMITH             920                                                           
+SMITH             920                                                           
+ALLEN            1840        300                                                
+WARD           1437.5        500                                                
+JONES         3421.25                                                           
+MARTIN         1437.5       1400                                                
+BLAKE          3277.5                                                           
+
+7 rows selected.
+
+SQL> SELECT
+  2  ename,job,sal*12+comm
+  3  FROM emp'
+  4  
+SQL> SELECT
+  2  ename,job,sal*12+comm
+  3  FROM emp;
+
+ENAME      JOB       SAL*12+COMM                                                
+---------- --------- -----------                                                
+SMITH      CLERK                                                                
+SMITH      CLERK                                                                
+ALLEN      SALESMAN        19500                                                
+WARD       SALESMAN        15500                                                
+JONES      MANAGER                                                              
+MARTIN     SALESMAN        16400                                                
+BLAKE      MANAGER                                                              
+
+7 rows selected.
+
+SQL> SELECT
+  2  ename,job,sal*12+comm
+  3  
+SQL> 
+SQL> select ename, job,sal*1.15+comm from emp;
+
+ENAME      JOB       SAL*1.15+COMM                                              
+---------- --------- -------------                                              
+SMITH      CLERK                                                                
+SMITH      CLERK                                                                
+ALLEN      SALESMAN           2140                                              
+WARD       SALESMAN         1937.5                                              
+JONES      MANAGER                                                              
+MARTIN     SALESMAN         2837.5                                              
+BLAKE      MANAGER                                                              
+
+7 rows selected.
+
+SQL> select ename job,sal*1.15+NVL(comm,0) from emp;
+
+JOB        SAL*1.15+NVL(COMM,0)                                                 
+---------- --------------------                                                 
+SMITH                       920                                                 
+SMITH                       920                                                 
+ALLEN                      2140                                                 
+WARD                     1937.5                                                 
+JONES                   3421.25                                                 
+MARTIN                   2837.5                                                 
+BLAKE                    3277.5                                                 
+
+7 rows selected.
+
+SQL> select ename job,sal*1.15+NVL(comm,0) from emp order by sal, ename;
+
+JOB        SAL*1.15+NVL(COMM,0)                                                 
+---------- --------------------                                                 
+SMITH                       920                                                 
+SMITH                       920                                                 
+MARTIN                   2837.5                                                 
+WARD                     1937.5                                                 
+ALLEN                      2140                                                 
+BLAKE                    3277.5                                                 
+JONES                   3421.25                                                 
+
+7 rows selected.
+
+SQL> select ename job,sal*1.15+NVL(comm,0) from emp order by sal;
+
+JOB        SAL*1.15+NVL(COMM,0)                                                 
+---------- --------------------                                                 
+SMITH                       920                                                 
+SMITH                       920                                                 
+WARD                     1937.5                                                 
+MARTIN                   2837.5                                                 
+ALLEN                      2140                                                 
+BLAKE                    3277.5                                                 
+JONES                   3421.25                                                 
+
+7 rows selected.
+
+SQL> select ename job,sal*1.15+NVL(comm,0) from emp order by sal, mgr
+  2  
+SQL> select ename job,sal*1.15+NVL(comm,0) from emp order by sal, mgr ;
+
+JOB        SAL*1.15+NVL(COMM,0)                                                 
+---------- --------------------                                                 
+SMITH                       920                                                 
+SMITH                       920                                                 
+WARD                     1937.5                                                 
+MARTIN                   2837.5                                                 
+ALLEN                      2140                                                 
+BLAKE                    3277.5                                                 
+JONES                   3421.25                                                 
+
+7 rows selected.
+
+SQL> select ename, sal , 2000 from emp order by abs (sal-2000);
+
+ENAME             SAL       2000                                                
+---------- ---------- ----------                                                
+ALLEN            1600       2000                                                
+WARD             1250       2000                                                
+MARTIN           1250       2000                                                
+BLAKE            2850       2000                                                
+JONES            2975       2000                                                
+SMITH             800       2000                                                
+SMITH             800       2000                                                
+
+7 rows selected.
+
+SQL> select ename, sal from emp order by 'one two';
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+SMITH             800                                                           
+SMITH             800                                                           
+ALLEN            1600                                                           
+WARD             1250                                                           
+JONES            2975                                                           
+MARTIN           1250                                                           
+BLAKE            2850                                                           
+
+7 rows selected.
+
+SQL> select ename, sal from emp order by 2,1 ;
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+SMITH             800                                                           
+SMITH             800                                                           
+MARTIN           1250                                                           
+WARD             1250                                                           
+ALLEN            1600                                                           
+BLAKE            2850                                                           
+JONES            2975                                                           
+
+7 rows selected.
+
+SQL> select ename,sal*12+NVL(comm,0) from emp order by 2;
+
+ENAME      SAL*12+NVL(COMM,0)                                                   
+---------- ------------------                                                   
+SMITH                    9600                                                   
+SMITH                    9600                                                   
+WARD                    15500                                                   
+MARTIN                  16400                                                   
+ALLEN                   19500                                                   
+BLAKE                   34200                                                   
+JONES                   35700                                                   
+
+7 rows selected.
+
+SQL> select ename,sal*12+NVL (comm,0) from emp order by 2;
+
+ENAME      SAL*12+NVL(COMM,0)                                                   
+---------- ------------------                                                   
+SMITH                    9600                                                   
+SMITH                    9600                                                   
+WARD                    15500                                                   
+MARTIN                  16400                                                   
+ALLEN                   19500                                                   
+BLAKE                   34200                                                   
+JONES                   35700                                                   
+
+7 rows selected.
+
+SQL> select ename, sal*12+NVL(comm,0) YEARSAL from emp order by YEARSAL;
+
+ENAME         YEARSAL                                                           
+---------- ----------                                                           
+SMITH            9600                                                           
+SMITH            9600                                                           
+WARD            15500                                                           
+MARTIN          16400                                                           
+ALLEN           19500                                                           
+BLAKE           34200                                                           
+JONES           35700                                                           
+
+7 rows selected.
+
+SQL> select ename "FAMILIA SOTRUDNIKA", sal "OKLAD SOTRUDNIka from emp order by "OKLAD SOTRUDNIka";
+ERROR:
+ORA-01756: quoted string not properly terminated 
+
+
+SQL> SELECT ename "Фамилия сотрудника",
+  2   sal "Оклад сотрудника"
+  3  FROM emp
+  4  ORDER BY "Оклад сотрудника";
+
+Фамилия со Оклад сотрудника                                                     
+---------- ----------------                                                     
+SMITH                   800                                                     
+SMITH                   800                                                     
+WARD                   1250                                                     
+MARTIN                 1250                                                     
+ALLEN                  1600                                                     
+BLAKE                  2850                                                     
+JONES                  2975                                                     
+
+7 rows selected.
+
+SQL> select deptno, dname from emp order by deptno;
+select deptno, dname from emp order by deptno
+               *
+ERROR at line 1:
+ORA-00904: "DNAME": invalid identifier 
+
+
+SQL> SELECT * FROM emp
+  2  WHERE sal>2000
+  3  ORDER BY ename;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+
+SQL> SELECT ename
+  2  FROM emp
+  3  WHERE job='MANAGER';
+
+ENAME                                                                           
+----------                                                                      
+JONES                                                                           
+BLAKE                                                                           
+
+SQL> SELECT ename,sal
+  2   FROM emp
+  3  WHERE deptno=20
+  4  
+SQL> SELECT ename,sal
+  2   FROM emp
+  3  WHERE deptno=20;
+
+ENAME             SAL                                                           
+---------- ----------                                                           
+SMITH             800                                                           
+SMITH             800                                                           
+JONES            2975                                                           
+
+SQL> SELECT * FROM emp
+  2  WHERE job='CLERK'
+  3  AND (sal<1000 OR job='MANAGER')
+  4  AND sal<2500
+  5  ;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+
+SQL> select ename, hiredate fropm emp where hiredate in ('SEP');
+select ename, hiredate fropm emp where hiredate in ('SEP')
+                             *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select ename, hiredate from emp where hiredate in ('SEP');
+select ename, hiredate from emp where hiredate in ('SEP')
+                                                   *
+ERROR at line 1:
+ORA-01858: a non-numeric character was found where a numeric was expected 
+
+
+SQL> select ename, hiredate from emp where hiredate LIKE '%S%';
+
+ENAME      HIREDATE                                                             
+---------- ---------                                                            
+MARTIN     28-SEP-81                                                            
+
+SQL> select ename, hiredate from emp where hiredate LIKE '___S%';
+
+ENAME      HIREDATE                                                             
+---------- ---------                                                            
+MARTIN     28-SEP-81                                                            
+
+SQL> select ename frop emp where ename like '%LL%' and '%TH%';
+select ename frop emp where ename like '%LL%' and '%TH%'
+                  *
+ERROR at line 1:
+ORA-00923: FROM keyword not found where expected 
+
+
+SQL> select ename from emp where ename like '%LL%' and '%TH%';
+select ename from emp where ename like '%LL%' and '%TH%'
+                                                       *
+ERROR at line 1:
+ORA-00920: invalid relational operator 
+
+
+SQL> select ename from emp where ename like '%LL%';
+
+ENAME                                                                           
+----------                                                                      
+ALLEN                                                                           
+
+SQL> select ename from emp where ename like '%TH%';
+
+ENAME                                                                           
+----------                                                                      
+SMITH                                                                           
+SMITH                                                                           
+
+SQL> select * from ename;
+select * from ename
+              *
+ERROR at line 1:
+ORA-00942: table or view does not exist 
+
+
+SQL> select * from emp;
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7369 SMITH      CLERK           7902 17-DEC-80        800                 
+        20                                                                      
+                                                                                
+      7499 ALLEN      SALESMAN        7698 20-FEB-81       1600        300      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7521 WARD       SALESMAN        7698 22-FEB-81       1250        500      
+        30                                                                      
+                                                                                
+      7566 JONES      MANAGER         7839 02-APR-81       2975                 
+        20                                                                      
+                                                                                
+      7654 MARTIN     SALESMAN        7698 28-SEP-81       1250       1400      
+        30                                                                      
+                                                                                
+
+     EMPNO ENAME      JOB              MGR HIREDATE         SAL       COMM      
+---------- ---------- --------- ---------- --------- ---------- ----------      
+    DEPTNO                                                                      
+----------                                                                      
+      7698 BLAKE      MANAGER         7839 01-MAY-81       2850                 
+        30                                                                      
+                                                                                
+
+7 rows selected.
+
+SQL> select ename, job, deptno from emp where deptno like '%20%';
+
+ENAME      JOB           DEPTNO                                                 
+---------- --------- ----------                                                 
+SMITH      CLERK             20                                                 
+SMITH      CLERK             20                                                 
+JONES      MANAGER           20                                                 
+
+SQL> select ename, job, deptno from emp where job='CLERK' and deptno like '%20%';
+
+ENAME      JOB           DEPTNO                                                 
+---------- --------- ----------                                                 
+SMITH      CLERK             20                                                 
+SMITH      CLERK             20                                                 
+
+SQL> spool off
