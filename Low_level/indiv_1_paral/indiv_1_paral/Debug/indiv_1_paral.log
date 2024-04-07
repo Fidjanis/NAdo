@@ -1,0 +1,4 @@
+﻿  indiv_1_paral.cpp
+C:\Users\User\Desktop\Низкоуровневое программирование\indiv_1_paral\indiv_1_paral\indiv_1_paral.cpp(34,9): warning C4101: temp: неиспользованная локальная переменная
+C:\Users\User\Desktop\Низкоуровневое программирование\indiv_1_paral\indiv_1_paral\indiv_1_paral.cpp(56,15): warning C4244: аргумент: преобразование "time_t" в "unsigned int", возможна потеря данных
+  indiv_1_paral.vcxproj -> C:\Users\User\Desktop\Низкоуровневое программирование\indiv_1_paral\Debug\indiv_1_paral.exe
