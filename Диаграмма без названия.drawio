@@ -91,8 +91,50 @@
         <mxCell id="L6HRKmS34xCsMJXOT7hc-14" value="Менеджер по закупкам" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-250" y="-340" width="120" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="L6HRKmS34xCsMJXOT7hc-16" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="120" y="-400" width="120" height="60" as="geometry" />
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-16" target="L6HRKmS34xCsMJXOT7hc-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-16" target="L6HRKmS34xCsMJXOT7hc-19">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-16" value="Формирование чека" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="-1060" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-17" target="L6HRKmS34xCsMJXOT7hc-21">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-17" target="L6HRKmS34xCsMJXOT7hc-23">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-17" value="Подсчёт суммы заказа" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="-920" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-30" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-19" target="L6HRKmS34xCsMJXOT7hc-29">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-19" value="Учёт оказанных услуг" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="-920" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-28" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-21" target="L6HRKmS34xCsMJXOT7hc-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-21" value="Учёт стоимости товара" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="-820" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="L6HRKmS34xCsMJXOT7hc-23" target="L6HRKmS34xCsMJXOT7hc-25">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-23" value="Получение информации о клиенте" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="-820" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-25" value="Учёт его статуса в программе лояльности" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="-710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-27" value="Учёт акций" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="-710" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-29" value="Отчёт об оказанных услугах" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="530" y="-820" width="120" height="60" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
