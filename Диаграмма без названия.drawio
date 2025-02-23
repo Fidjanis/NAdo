@@ -91,6 +91,9 @@
         <mxCell id="L6HRKmS34xCsMJXOT7hc-14" value="Менеджер по закупкам" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="-250" y="-340" width="120" height="60" as="geometry" />
         </mxCell>
+        <mxCell id="L6HRKmS34xCsMJXOT7hc-16" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="-400" width="120" height="60" as="geometry" />
+        </mxCell>
       </root>
     </mxGraphModel>
   </diagram>
